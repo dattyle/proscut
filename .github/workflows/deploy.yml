@@ -16,7 +16,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: ./
+        server-dir: /
         protocol: ftps        # SiteGround supports FTPS — encrypts your password in transit
         port: 21
         exclude: |
