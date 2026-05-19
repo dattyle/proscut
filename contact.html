@@ -186,7 +186,7 @@
       <h2 class="section-title">Have a question?</h2>
       <p style="margin-top: 14px;">Use the form below and we'll get back to you. For fastest service, just give us a call.</p>
 
-      <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/datle+proscut@gmail.com" method="POST" aria-label="Contact form" novalidate>
+      <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/datle%2Bproscut@gmail.com" method="POST" aria-label="Contact form" novalidate>
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <input type="hidden" name="_subject" value="New message from the Pros Cut website">
         <input type="hidden" name="_template" value="table">
@@ -250,12 +250,17 @@
       headers: { 'Accept': 'application/json' }
     })
       .then(function (response) {
-        if (!response.ok) throw new Error('Network response was not ok');
-        form.hidden = true;
-        success.hidden = false;
-        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return response.json().then(function (data) {
+          if (!response.ok || (data && data.success === 'false')) {
+            throw new Error((data && data.message) || ('HTTP ' + response.status));
+          }
+          form.hidden = true;
+          success.hidden = false;
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
       })
-      .catch(function () {
+      .catch(function (err) {
+        console.error('Contact form submission failed:', err);
         if (errorMsg) errorMsg.hidden = false;
         if (submitBtn) {
           submitBtn.disabled = false;
