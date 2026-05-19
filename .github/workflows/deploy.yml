@@ -16,4 +16,4 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/ # SiteGround's default public web folder
+        server-dir: / # SiteGround's default public web folder
