@@ -186,11 +186,11 @@
       <h2 class="section-title">Have a question?</h2>
       <p style="margin-top: 14px;">Use the form below and we'll get back to you. For fastest service, just give us a call.</p>
 
-      <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/datle%2Bproscut@gmail.com" method="POST" aria-label="Contact form" novalidate>
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
-        <input type="hidden" name="_subject" value="New message from the Pros Cut website">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
+      <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" aria-label="Contact form" novalidate>
+        <input type="hidden" name="access_key" value="73a2ebde-e606-4f19-b48b-da82c5621508">
+        <input type="hidden" name="subject" value="New message from the Pros Cut website">
+        <input type="hidden" name="from_name" value="Pros Cut website">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <div class="form-row">
           <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required autocomplete="name" maxlength="100"></div>
           <div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="20" pattern="[0-9\s\-\+\(\)]*"></div>
@@ -251,7 +251,7 @@
     })
       .then(function (response) {
         return response.json().then(function (data) {
-          if (!response.ok || (data && data.success === 'false')) {
+          if (!response.ok || !data || data.success !== true) {
             throw new Error((data && data.message) || ('HTTP ' + response.status));
           }
           form.hidden = true;
