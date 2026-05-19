@@ -1,0 +1,19 @@
+name: Deploy to SiteGround
+on:
+  push:
+    branches:
+      - main # Triggers the deploy whenever you push to the main branch
+jobs:
+  web-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v3
+    
+    - name: Sync files to SiteGround
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/ # SiteGround's default public web folder
