@@ -6,17 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.proscut.com/services.html</loc>
+    <loc>https://www.proscut.com/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.proscut.com/about.html</loc>
+    <loc>https://www.proscut.com/about</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.proscut.com/contact.html</loc>
+    <loc>https://www.proscut.com/contact</loc>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
