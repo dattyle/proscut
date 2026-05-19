@@ -1,0 +1,53 @@
+# ============================================================
+# Pros Cut — .htaccess
+# Apache rewrite rules for clean URLs (no .html extension)
+# Document root: /public_html/
+# ============================================================
+
+RewriteEngine On
+RewriteBase /
+
+# ------------------------------------------------------------
+# 1. (Optional) Force HTTPS
+#    Uncomment ONLY if SiteGround isn't already enforcing HTTPS
+#    via Site Tools > Security > HTTPS Enforce.
+# ------------------------------------------------------------
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ------------------------------------------------------------
+# 2. (Optional) Force www.
+#    Uncomment if you want bare-domain requests redirected to www.
+# ------------------------------------------------------------
+# RewriteCond %{HTTP_HOST} ^proscut\.com$ [NC]
+# RewriteRule ^ https://www.proscut.com%{REQUEST_URI} [R=301,L]
+
+# ------------------------------------------------------------
+# 3. Redirect /index.html and /index to "/"
+#    The homepage canonical lives at the root, not at /index.
+#    Must come BEFORE Rule 4 so /index.html doesn't get sent to
+#    /index (which would 404).
+# ------------------------------------------------------------
+RewriteRule ^index(\.html)?$ / [R=301,L]
+
+# ------------------------------------------------------------
+# 4. Redirect /page.html -> /page  (preserves SEO of old links)
+#    Uses THE_REQUEST so we only fire on real external requests,
+#    not on the internal rewrite from Rule 5 below (avoids loops).
+# ------------------------------------------------------------
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.\s]+)\.html(\?[^\s]*)?\ HTTP [NC]
+RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
+
+# ------------------------------------------------------------
+# 5. Internally serve /page from page.html on disk
+#    Only if /page isn't an existing file or directory.
+# ------------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# ------------------------------------------------------------
+# 6. Security: disable directory listings
+# ------------------------------------------------------------
+Options -Indexes
