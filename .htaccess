@@ -36,7 +36,7 @@ RewriteRule ^index(\.html)?$ / [R=301,L]
 #    rewrite these to /proscut-services etc. (which would 404).
 # ------------------------------------------------------------
 RewriteRule ^proscut-services\.html$ /services [R=301,L]
-RewriteRule ^hair-permint\.html$     /services [R=301,L]
+RewriteRule ^hair-perming\.html$     /services [R=301,L]
 RewriteRule ^proscut-hours\.html$    /contact  [R=301,L]
 RewriteRule ^contact-proscut\.html$  /contact  [R=301,L]
 
