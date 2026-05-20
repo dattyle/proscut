@@ -25,21 +25,31 @@ RewriteBase /
 # ------------------------------------------------------------
 # 3. Redirect /index.html and /index to "/"
 #    The homepage canonical lives at the root, not at /index.
-#    Must come BEFORE Rule 4 so /index.html doesn't get sent to
+#    Must come BEFORE Rule 5 so /index.html doesn't get sent to
 #    /index (which would 404).
 # ------------------------------------------------------------
 RewriteRule ^index(\.html)?$ / [R=301,L]
 
 # ------------------------------------------------------------
-# 4. Redirect /page.html -> /page  (preserves SEO of old links)
+# 4. Legacy URL redirects (one-off pages that no longer exist)
+#    Must come BEFORE Rule 5 so the generic .html stripper doesn't
+#    rewrite these to /proscut-services etc. (which would 404).
+# ------------------------------------------------------------
+RewriteRule ^proscut-services\.html$ /services [R=301,L]
+RewriteRule ^hair-permint\.html$     /services [R=301,L]
+RewriteRule ^proscut-hours\.html$    /contact  [R=301,L]
+RewriteRule ^contact-proscut\.html$  /contact  [R=301,L]
+
+# ------------------------------------------------------------
+# 5. Redirect /page.html -> /page  (preserves SEO of old links)
 #    Uses THE_REQUEST so we only fire on real external requests,
-#    not on the internal rewrite from Rule 5 below (avoids loops).
+#    not on the internal rewrite from Rule 6 below (avoids loops).
 # ------------------------------------------------------------
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.\s]+)\.html(\?[^\s]*)?\ HTTP [NC]
 RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
 
 # ------------------------------------------------------------
-# 5. Internally serve /page from page.html on disk
+# 6. Internally serve /page from page.html on disk
 #    Only if /page isn't an existing file or directory.
 # ------------------------------------------------------------
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -48,6 +58,6 @@ RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^([^/]+)/?$ $1.html [L]
 
 # ------------------------------------------------------------
-# 6. Security: disable directory listings
+# 7. Security: disable directory listings
 # ------------------------------------------------------------
 Options -Indexes
