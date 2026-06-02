@@ -57,9 +57,10 @@ RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
 
 # ------------------------------------------------------------
 # 6. Internally serve clean URLs from .html files on disk
-#    /services overview wins over the services/ directory name.
+#    /services overview lives at services/index.html (avoids 403
+#    when Apache treats the services/ folder as a directory).
 # ------------------------------------------------------------
-RewriteRule ^services/?$ services.html [L]
+RewriteRule ^services/?$ services/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
