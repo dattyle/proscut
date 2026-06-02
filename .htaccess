@@ -35,10 +35,9 @@ RewriteRule ^index(\.html)?$ / [R=301,L]
 #    Must come BEFORE Rule 5 so the generic .html stripper doesn't
 #    rewrite these to /proscut-services etc. (which would 404).
 # ------------------------------------------------------------
-RewriteRule ^proscut-services\.html$ /services [R=301,L]
-RewriteRule ^hair-perming\.html$     /services [R=301,L]
-RewriteRule ^proscut-hours\.html$    /contact  [R=301,L]
-RewriteRule ^contact-proscut\.html$  /contact  [R=301,L]
+RewriteRule ^proscut-services\.html$ /services      [R=301,L]
+RewriteRule ^proscut-hours\.html$    /contact       [R=301,L]
+RewriteRule ^contact-proscut\.html$  /contact       [R=301,L]
 
 # ------------------------------------------------------------
 # 5. Redirect /page.html -> /page  (preserves SEO of old links)
