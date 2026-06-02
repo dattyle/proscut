@@ -39,6 +39,14 @@ RewriteRule ^proscut-services\.html$ /services      [R=301,L]
 RewriteRule ^proscut-hours\.html$    /contact       [R=301,L]
 RewriteRule ^contact-proscut\.html$  /contact       [R=301,L]
 
+# Flat service URLs -> nested /services/* (preserve SEO after taxonomy move)
+RewriteRule ^mens-haircut(\.html)?$       /services/mens-haircut       [R=301,L]
+RewriteRule ^womens-haircut(\.html)?$     /services/womens-haircut     [R=301,L]
+RewriteRule ^kids-haircut(\.html)?$       /services/kids-haircut       [R=301,L]
+RewriteRule ^hair-coloring(\.html)?$      /services/hair-coloring      [R=301,L]
+RewriteRule ^hair-perming(\.html)?$       /services/hair-perming       [R=301,L]
+RewriteRule ^manicure-pedicure(\.html)?$  /services/manicure-pedicure  [R=301,L]
+
 # ------------------------------------------------------------
 # 5. Redirect /page.html -> /page  (preserves SEO of old links)
 #    Uses THE_REQUEST so we only fire on real external requests,
@@ -48,9 +56,16 @@ RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.\s]+)\.html(\?[^\s]*)?\ HTTP [NC]
 RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
 
 # ------------------------------------------------------------
-# 6. Internally serve /page from page.html on disk
-#    Only if /page isn't an existing file or directory.
+# 6. Internally serve clean URLs from .html files on disk
+#    /services overview wins over the services/ directory name.
 # ------------------------------------------------------------
+RewriteRule ^services/?$ services.html [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2.html [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
