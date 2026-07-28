@@ -133,7 +133,18 @@
   <nav class="nav" aria-label="Primary">
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/services">Services</a></li>
+      <li class="nav-dropdown">
+        <a href="/services">Services</a>
+        <ul class="nav-subnav" aria-label="Services submenu">
+          <li><a href="/services">All Services</a></li>
+          <li><a href="/services/mens-haircut">Men's Haircuts</a></li>
+          <li><a href="/services/womens-haircut">Women's Haircuts</a></li>
+          <li><a href="/services/kids-haircut">Kids' Haircuts</a></li>
+          <li><a href="/services/hair-coloring">Hair Coloring</a></li>
+          <li><a href="/services/hair-perming">Hair Perming</a></li>
+          <li><a href="/services/manicure-pedicure">Manicure &amp; Pedicure</a></li>
+        </ul>
+      </li>
       <li><a href="/about" class="active">About</a></li>
       <li><a href="/join">Join</a></li>
       <li><a href="/contact">Contact</a></li>
@@ -147,9 +158,16 @@
 
 <main id="main">
 
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+    <li><a href="/">Home</a></li>
+    <li aria-current="page">About</li>
+    </ol>
+  </nav>
+
   <section class="hero" style="padding: 56px 32px 32px;">
     <p class="eyebrow">Our story</p>
-    <h1 class="section-title">A familiar chair on El Camino</h1>
+    <h1 class="section-title">About Pros Cut — Sunnyvale hair salon since 1989</h1>
     <p style="max-width: 36em; margin: 18px auto 0;">For over thirty years, the same friendly hands and the same fair prices.</p>
   </section>
 
